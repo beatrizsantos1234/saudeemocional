@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuidando da Mente - Portal de Apoio</title>
+    <style>
+        /* Variáveis para Temas */
+        :root {
+            --bg-color: #f0f8f5;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --primary-color: #2e8b57;
+            --primary-hover: #236b43;
+            --border-color: #d1e7dd;
+        }
+
+        body.dark-mode {
+            --bg-color: #121f19;
+            --card-bg: #1c2d25;
+            --text-color: #e0f2fe;
+            --primary-color: #3cb371;
+            --primary-hover: #2e8b57;
+            --border-color: #2d4a3e;
+        }
+
+        /* Estilos Gerais */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header & Navegação */
+        header {
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        #theme-toggle {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Seções e Layout */
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), #48b5a3);
+            color: #ffffff;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-section h2 {
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-section p {
+            margin-bottom: 1.2rem;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .content-section h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-top: 1rem;
+        }
+
+        .orientacoes-box {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background-color: var(--card-bg);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 6px;
+        }
+
+        .orientacoes-box ul {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+        }
+
+        /* Formulários e Botões */
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin: 0.8rem 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Estilos do Quiz */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .option-btn {
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+
+        /* Botão Voltar ao Topo */
+        #btn-topo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 0.8rem 1rem;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: none;
+            font-size: 1rem;
+        }
+
+        .ref-list {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+        }
+
+        .ref-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .ref-list a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>🌱 Cuidando da Mente</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#escuta">Portal de Escuta</a></li>
+                <li><a href="#quiz">Quiz Interativo</a></li>
+                <li><a href="#referencias">Referências</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" aria-label="Alternar modo escuro">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero-section">
+            <div class="hero-content">
+                <h2>Bem-vindo ao Portal de Apoio ao Estudante</h2>
+                <p>Cuidar dos seus sentimentos é tão importante quanto cuidar do corpo. Aqui você encontra um espaço de acolhimento, autoconhecimento e orientações para os desafios do dia a dia escolar.</p>
+                <a href="#escuta" class="btn-primary">Precisa conversar? Acesse a escuta</a>
+            </div>
+        </section>
+
+        <section id="escuta" class="content-section">
+            <h2>🗣️ Portal de Escuta</h2>
+            <p>Este é um espaço seguro para você desabafar e organizar o que está sentindo sem julgamentos.</p>
+            
+            <div class="card">
+                <form id="escuta-form">
+                    <label for="desabafo">Escreva aqui o que você está sentindo ou passando:</label>
+                    <textarea id="desabafo" rows="5" placeholder="Escreva como você está se sentindo hoje..." required></textarea>
+                    <button type="submit" class="btn-primary">Enviar Desabafo</button>
+                </form>
+
+                <div id="mensagem-resposta" class="hidden"></div>
+            </div>
+
+            <div class="orientacoes-box">
+                <h3>📌 Onde buscar apoio emocional?</h3>
+                <p>Se as emoções estiverem muito difíceis de lidar sozinho, procure ajuda com quem importa:</p>
+                <ul>
+                    <li>Pedagogos, psicólogos escolares ou professores de confiança;</li>
+                    <li>Seus pais ou responsáveis;</li>
+                    <li>CVV (Centro de Valorização da Vida) - Disque 188 ou acesse o site oficial;</li>
+                    <li>Unidades Básicas de Saúde (UBS) do seu município.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="quiz" class="content-section">
+            <h2>🧠 Quiz Interativo: Saúde Emocional</h2>
+            <div class="card" id="quiz-container">
+                <div id="question-box">
+                    <h3 id="question-text">Carregando pergunta...</h3>
+                    <div id="options-box" class="options-container"></div>
+                </div>
+                <div id="quiz-result" class="hidden">
+                    <h3>Resultado Final</h3>
+                    <p id="score-text" style="margin: 1rem 0; font-size: 1.2rem; font-weight: bold;"></p>
+                    <button id="restart-btn" class="btn-primary">Refazer Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="referencias" class="content-section">
+            <h2>📚 Referências e Fontes Confiáveis</h2>
+            <p>Todo o conteúdo deste portal foi baseado em materiais oficiais e educativos sobre saúde mental:</p>
+            <ul class="ref-list">
+                <li><a href="https://www.gov.br/saude/pt-br" target="_blank" rel="noopener noreferrer">Ministério da Saúde - Saúde Mental</a></li>
+                <li><a href="https://cvv.org.br/" target="_blank" rel="noopener noreferrer">CVV - Centro de Valorização da Vida</a></li>
+                <li><a href="https://www.paho.org/pt/brasil" target="_blank" rel="noopener noreferrer">OPAS/OMS - Organização Pan-Americana da Saúde</a></li>
+                <li><a href="https://www.unicef.org/brazil/saude-mental-dos-adolescentes" target="_blank" rel="noopener noreferrer">UNICEF Brasil - Saúde Mental dos Adolescentes</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <button id="btn-topo" title="Voltar ao topo">⬆️</button>
+
+    <footer>
+        <p>Portal de Apoio ao Estudante — Projeto Individual</p>
+    </footer>
+
+    <script>
+        // --- Modo Escuro ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Escuro';
+        });
+
+        // --- Portal de Escuta (Simulação de Envio) ---
+        const escutaForm = document.getElementById('escuta-form');
+        const mensagemResposta = document.getElementById('mensagem-resposta');
+
+        const frasesMotivacionais = [
+            "Reconhecer seus sentimentos é o primeiro passo para cuidar de você.",
+            "Não tem problema não estar bem o tempo todo. Seja gentil com o seu processo.",
+            "Pedir ajuda é um ato de coragem e cuidado com a sua saúde mental.",
+            "Você é mais forte do que imagina e não precisa passar por tudo sozinho."
+        ];
+
+        escutaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const fraseAleatoria = frasesMotivacionais[Math.floor(Math.random() * frasesMotivacionais.length)];
+
+            mensagemResposta.classList.remove('hidden');
+            mensagemResposta.innerHTML = `
+                <div style="margin-top: 1rem; padding: 1rem; background-color: rgba(46, 139, 87, 0.15); border-left: 4px solid var(--primary-color); border-radius: 4px;">
+                    <p><strong>Sua mensagem foi acolhida!</strong> Lembre-se de que este formulário é uma simulação, mas seus sentimentos são reais.</p>
+                    <p style="margin-top: 0.5rem; font-style: italic;">"${fraseAleatoria}"</p>
+                </div>
+            `;
+
+            escutaForm.reset();
+        });
+
+        // --- Quiz Interativo sobre Saúde Emocional (5 Perguntas) ---
+        const quizData = [
+            {
+                question: "1. O que é ter saúde emocional?",
+                options: [
+                    "Estar feliz o tempo todo sem nunca ficar triste",
+                    "Saber reconhecer, expressar e lidar com diferentes emoções",
+                    "Guardar os sentimentos ruins apenas para você",
+                    "Evitar conversar sobre seus problemas com outras pessoas"
+                ],
+                answer: 1
+            },
+            {
+                question: "2. Quando você estiver se sentindo muito sobrecarregado com os estudos ou a rotina, o que deve fazer?",
+                options: [
+                    "Ignorar o cansaço e continuar até a exaustão",
+                    "Fazer pausas, praticar algo de que gosta e conversar com alguém",
+                    "Desistir totalmente das suas responsabilidades",
+                    "Guardar tudo para si até passar sozinho"
+                ],
+                answer: 1
+            },
+            {
+                question: "3. Pedir ajuda a um adulto de confiança quando está triste ou ansioso demonstra:",
+                options: [
+                    "Fraqueza e dependência",
+                    "Coragem e autocuidado",
+                    "Falta de maturidade",
+                    "Uma atitude desnecessária"
+                ],
+                answer: 1
+            },
+            {
+                question: "4. Qual das atitudes abaixo ajuda a promover o bem-estar mental no dia a dia?",
+                options: [
+                    "Dormir poucas horas por noite",
+                    "Usar telas até tarde antes de dormir",
+                    "Praticar atividades físicas e manter uma rotina equilibrada",
+                    "Comparar sua vida com a dos outros nas redes sociais"
+                ],
+                answer: 2
+            },
+            {
+                question: "5. Como você pode apoiar um amigo que está passando por um momento emocional difícil?",
+                options: [
+                    "Dizer para ele deixar de bobagem e esquecer o assunto",
+                    "Escutar com atenção, demonstrar empatia e incentivar a buscar ajuda",
+                    "Contar o segredo dele para toda a turma",
+                    "Evitar falar com ele até que melhore"
+                ],
+                answer: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionText = document.getElementById('question-text');
+        const optionsBox = document.getElementById('options-box');
+        const quizResult = document.getElementById('quiz-result');
+        const questionBox = document.getElementById('question-box');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            questionText.textContent = q.question;
+            optionsBox.innerHTML = '';
+
+            q.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.classList.add('option-btn');
+                btn.textContent = option;
+                btn.addEventListener('click', () => checkAnswer(index));
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            questionBox.classList.add('hidden');
+            quizResult.classList.remove('hidden');
+            scoreText.textContent = `Você acertou ${score} de ${quizData.length} perguntas!`;
+        }
+
+        restartBtn.addEventListener('click', () => {
+            currentQuestion = 0;
+            score = 0;
+            quizResult.classList.add('hidden');
+            questionBox.classList.remove('hidden');
+            loadQuestion();
+        });
+
+        // Inicializar Quiz
+        loadQuestion();
+
+        // --- Botão Voltar ao Topo ---
+        const btnTopo = document.getElementById('btn-topo');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btnTopo.style.display = 'block';
+            } else {
+                btnTopo.style.display = 'none';
+            }
+        });
+
+        btnTopo.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
